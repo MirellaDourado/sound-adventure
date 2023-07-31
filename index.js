@@ -3,6 +3,8 @@ const c = canvas.getContext('2d')
 
 canvas.width = 64 * 16 // 1024
 canvas.height = 64 * 9 // 576
+let audioCtx;
+
 
 let parsedCollisions
 let collisionBlocks
