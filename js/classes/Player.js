@@ -18,6 +18,7 @@ class Player extends Sprite {
     this.collisionBlocks = collisionBlocks
     this.leftAudio = new Audio('./sounds/hit-wall-left.mp3');
     this.rightAudio = new Audio('./sounds/hit-wall-right.mp3');
+    this.doorAudio = new Audio('./sounds/wink.mp3')
     this.leftAudio.volume = 0.2
     this.rightAudio.volume = 0.2
   }
@@ -29,7 +30,7 @@ class Player extends Sprite {
 
     this.checkForHorizontalCollisions()
     this.applyGravity()
-
+this.checkForDoors()
     this.updateHitbox()
     this.checkForVerticalCollisions()
 
@@ -101,6 +102,22 @@ class Player extends Sprite {
           this.rightAudio.play();
           break
         }
+      }
+    }
+  }
+
+  checkForDoors() {
+    for (let i = 0; i < doors.length; i++) {
+      const door = doors[i]
+      if (
+        this.hitbox.position.x + this.hitbox.width <=
+          door.position.x + door.width &&
+        player.hitbox.position.x >= door.position.x &&
+        player.hitbox.position.y + player.hitbox.height >= door.position.y &&
+        player.hitbox.position.y <= door.position.y + door.height
+      ) {
+          this.doorAudio.play()        
+        return
       }
     }
   }
