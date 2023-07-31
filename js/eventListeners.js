@@ -17,6 +17,8 @@ window.addEventListener('keydown', (event) => {
           player.preventInput = true
           player.switchSprite('enterDoor')
           door.play()
+          const audio = new Audio('./sounds/open-door.mp3');
+          audio.play()
           return
         }
       }
