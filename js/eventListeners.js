@@ -1,10 +1,10 @@
-const doorAudio = new Audio('./sounds/open-door.mp3');
 
 
 window.addEventListener('keydown', (event) => {
   if (player.preventInput) return
   switch (event.key) {
     case 'w':
+      // audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       for (let i = 0; i < doors.length; i++) {
         const door = doors[i]
 
@@ -15,23 +15,18 @@ window.addEventListener('keydown', (event) => {
           player.hitbox.position.y + player.hitbox.height >= door.position.y &&
           player.hitbox.position.y <= door.position.y + door.height
         ) {
+          const doorAudio = new Audio('./sounds/jump.mp3');
+          doorAudio.play()
           player.velocity.x = 0
           player.velocity.y = 0
           player.preventInput = true
           player.switchSprite('enterDoor')
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          const source = audioCtx.createMediaElementSource(doorAudio);
-          const panNode = audioCtx.createStereoPanner();
-          source.connect(panNode);
-          panNode.connect(audioCtx.destination);
-          doorAudio.play()
           door.play()
           return
         }
       }
       if (player.velocity.y === 0) {
         const audio = new Audio('./sounds/jump.mp3');
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioCtx.createMediaElementSource(audio);
         const panNode = audioCtx.createStereoPanner();
         source.connect(panNode);
