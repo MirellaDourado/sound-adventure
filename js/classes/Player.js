@@ -16,8 +16,10 @@ class Player extends Sprite {
     }
     this.gravity = 1
     this.collisionBlocks = collisionBlocks
-    this.audio = new Audio('./sounds/hit-wall.mp3');
-    this.audioCtx = false
+    this.leftAudio = new Audio('./sounds/hit-wall-left.mp3');
+    this.rightAudio = new Audio('./sounds/hit-wall-right.mp3');
+    this.leftAudio.volume = 0.2
+    this.rightAudio.volume = 0.2
   }
 
   update() {
@@ -31,13 +33,6 @@ class Player extends Sprite {
     this.updateHitbox()
     this.checkForVerticalCollisions()
 
-    if (audioCtx !== undefined && !this.audioCtx) {
-      this.audioCtx = true;
-      this.source = audioCtx.createMediaElementSource(this.audio);
-      this.panNode = audioCtx.createStereoPanner();
-      this.source.connect(this.panNode);
-            this.panNode.connect(audioCtx.destination);
-    }
   }
 
   handleInput(keys) {
@@ -81,8 +76,6 @@ class Player extends Sprite {
   checkForHorizontalCollisions() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i]
-
-      // if a collision exists
       if (
         this.hitbox.position.x <=
           collisionBlock.position.x + collisionBlock.width &&
@@ -97,8 +90,7 @@ class Player extends Sprite {
           const offset = this.hitbox.position.x - this.position.x
           this.position.x =
             collisionBlock.position.x + collisionBlock.width - offset + 0.01
-            this.panNode.pan.value = -1;
-            this.audio.play();
+            this.leftAudio.play();
           break
         }
 
@@ -106,8 +98,7 @@ class Player extends Sprite {
           const offset =
             this.hitbox.position.x - this.position.x + this.hitbox.width
           this.position.x = collisionBlock.position.x - offset - 0.01;
-          this.panNode.pan.value = 1;
-          this.audio.play();
+          this.rightAudio.play();
           break
         }
       }

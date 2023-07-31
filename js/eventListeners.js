@@ -4,7 +4,6 @@ window.addEventListener('keydown', (event) => {
   if (player.preventInput) return
   switch (event.key) {
     case 'w':
-      // audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       for (let i = 0; i < doors.length; i++) {
         const door = doors[i]
 
@@ -15,7 +14,7 @@ window.addEventListener('keydown', (event) => {
           player.hitbox.position.y + player.hitbox.height >= door.position.y &&
           player.hitbox.position.y <= door.position.y + door.height
         ) {
-          const doorAudio = new Audio('./sounds/jump.mp3');
+          const doorAudio = new Audio('./sounds/open-door.mp3');
           doorAudio.play()
           player.velocity.x = 0
           player.velocity.y = 0
@@ -27,22 +26,16 @@ window.addEventListener('keydown', (event) => {
       }
       if (player.velocity.y === 0) {
         const audio = new Audio('./sounds/jump.mp3');
-        const source = audioCtx.createMediaElementSource(audio);
-        const panNode = audioCtx.createStereoPanner();
-        source.connect(panNode);
-        panNode.connect(audioCtx.destination);
         audio.play()
         player.velocity.y = -25
       }
       break
     case 'a':
       // move player to the left
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       keys.a.pressed = true
       break
     case 'd':
       // move player to the right
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       keys.d.pressed = true
       break
   }
