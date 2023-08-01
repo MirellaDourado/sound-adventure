@@ -129,8 +129,6 @@ class Player extends Sprite {
   checkForVerticalCollisions() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i]
-
-      // if a collision exists
       if (
         this.hitbox.position.x <=
           collisionBlock.position.x + collisionBlock.width &&
@@ -148,7 +146,6 @@ class Player extends Sprite {
             collisionBlock.position.y + collisionBlock.height - offset + 0.01
           break
         }
-
         if (this.velocity.y > 0) {
           this.velocity.y = 0
           const offset =

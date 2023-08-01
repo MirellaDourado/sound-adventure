@@ -4,7 +4,6 @@ window.addEventListener('keydown', (event) => {
     case 'ArrowUp':
       for (let i = 0; i < doors.length; i++) {
         const door = doors[i]
-
         if (
           player.hitbox.position.x + player.hitbox.width <=
             door.position.x + door.width &&
@@ -45,14 +44,10 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('keyup', (event) => {
   switch (event.key) {
     case 'ArrowLeft':
-      // move player to the left
       keys.a.pressed = false
-
       break
     case 'ArrowRight':
-      // move player to the right
       keys.d.pressed = false
-
       break
   }
 })

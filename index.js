@@ -1,10 +1,11 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = 64 * 16 // 1024
-canvas.height = 64 * 9 // 576
+canvas.width = 64 * 16
+canvas.height = 64 * 9
 
 const nextLevelAudio = new Audio('../sounds/next-level.mp3')
+let level = 1;
 let parsedCollisions
 let collisionBlocks
 let background
@@ -63,10 +64,6 @@ const player = new Player({
     },
   },
 })
-// const enemy = new Enemy({})
-
-
-let level = 1;
 let levels = {
   1: {
     init: () => {
@@ -109,9 +106,7 @@ let levels = {
       enemies.map((ar) => ar.setCollision(collisionBlocks))
       player.position.x = 96
       player.position.y = 140
-
       if (player.currentAnimation) player.currentAnimation.isActive = false
-
       background = new Sprite({
         position: {
           x: 0,
@@ -143,7 +138,6 @@ let levels = {
       player.position.x = 750
       player.position.y = 230
       if (player.currentAnimation) player.currentAnimation.isActive = false
-
       background = new Sprite({
         position: {
           x: 0,
@@ -151,7 +145,6 @@ let levels = {
         },
         imageSrc: './img/backgroundLevel3.png',
       })
-
       doors = [
         new Sprite({
           position: {

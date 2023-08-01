@@ -145,8 +145,6 @@ class Enemy {
   checkForVerticalCollisions() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i]
-
-      // if a collision exists
       if (
         this.position.x <=
           collisionBlock.position.x + collisionBlock.width &&
@@ -164,7 +162,6 @@ class Enemy {
             collisionBlock.position.y + collisionBlock.height - offset + 0.01
           break
         }
-
         if (this.velocity.y > 0) {
           this.velocity.y = 0
           const offset =
