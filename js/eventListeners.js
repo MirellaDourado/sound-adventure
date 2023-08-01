@@ -30,10 +30,10 @@ window.addEventListener('keydown', (event) => {
       }
       break
     case 'ArrowLeft':
-      keys.a.pressed = true
+      keys.ArrowLeft.pressed = true
       break
     case 'ArrowRight':
-      keys.d.pressed = true
+      keys.ArrowRight.pressed = true
       break
       case ' ': 
       attack = true;
@@ -44,10 +44,10 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('keyup', (event) => {
   switch (event.key) {
     case 'ArrowLeft':
-      keys.a.pressed = false
+      keys.ArrowLeft.pressed = false
       break
     case 'ArrowRight':
-      keys.d.pressed = false
+      keys.ArrowRight.pressed = false
       break
   }
 })

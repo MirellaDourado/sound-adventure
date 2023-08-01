@@ -163,13 +163,13 @@ let levels = {
 }
 
 const keys = {
-  w: {
+  ArrowUp: {
     pressed: false,
   },
-  a: {
+  ArrowLeft: {
     pressed: false,
   },
-  d: {
+  ArrowRight: {
     pressed: false,
   },
 }
