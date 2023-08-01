@@ -1,7 +1,7 @@
 window.addEventListener('keydown', (event) => {
   if (player.preventInput) return
   switch (event.key) {
-    case 'w':
+    case 'ArrowUp':
       for (let i = 0; i < doors.length; i++) {
         const door = doors[i]
 
@@ -30,28 +30,27 @@ window.addEventListener('keydown', (event) => {
         player.velocity.y = -25
       }
       break
-    case 'a':
-      // move player to the left
+    case 'ArrowLeft':
       keys.a.pressed = true
       break
-    case 'd':
-      // move player to the right
+    case 'ArrowRight':
       keys.d.pressed = true
       break
       case ' ': 
       attack = true;
       break;
+      default: console.log(event.key);
   }
 })
 
 window.addEventListener('keyup', (event) => {
   switch (event.key) {
-    case 'a':
+    case 'ArrowLeft':
       // move player to the left
       keys.a.pressed = false
 
       break
-    case 'd':
+    case 'ArrowRight':
       // move player to the right
       keys.d.pressed = false
 
