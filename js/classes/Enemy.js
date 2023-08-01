@@ -51,7 +51,6 @@ class Enemy {
     if (this.position.x > player.hitbox.position.x + player.hitbox.width){
       this.audioLeft.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      console.log(teste)
       if(teste >= -60) {
         this.audioRight.volume = 1
         return this.audioRight.play();

@@ -39,7 +39,6 @@ window.addEventListener('keydown', (event) => {
       case ' ': 
       attack = true;
       break;
-      default: console.log(event.key);
   }
 })
 
