@@ -13,6 +13,9 @@ class Enemy {
     this.collisionBlocks = collisionBlocks;
     this.minimumLimit = minimumLimit;
     this.maximumLimit = maximumLimit;
+    this.audioRight = new Audio('../../sounds/ghost-right.mp3')
+    this.audioLeft = new Audio('../../sounds/ghost-left.mp3')
+
   }
 
   draw() {
@@ -29,10 +32,10 @@ class Enemy {
     this.checkForHeroCollisions(player)
     this.applyGravity()
     this.checkForVerticalCollisions()
+    this.makeSound()
   }
 
   moveEnemy() {
-    console.log(this.maximumLimit, this.minimumLimit )
     this.position.x += this.velocity.x
     if (this.position.x + this.width >= this.maximumLimit) {
       this.velocity.x = -this.velocity.x;
@@ -40,6 +43,58 @@ class Enemy {
     if (this.position.x + this.width <= this.minimumLimit) {
       this.velocity.x = -this.velocity.x;
     }
+  }
+
+  makeSound() {
+    if (this.position.x > player.hitbox.position.x + player.hitbox.width){
+      this.audioLeft.pause();
+      const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
+      if(teste > -40) {
+        this.audioRight.volume = 1
+        return this.audioRight.play();
+      }
+      if(teste > -80) {
+        this.audioRight.volume = 0.5
+        return this.audioRight.play();
+      }
+      if(teste > -150) {
+        this.audioRight.volume = 0.2
+        return this.audioRight.play();
+      }
+    } if (this.position.x < player.hitbox.position.x + player.hitbox.width)   {
+      this.audioRight.pause();
+      const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
+      console.log(teste)
+      if(teste > 40) {
+        this.audioLeft.volume = 1
+        return this.audioLeft.play();
+      }
+      if(teste > 80) {
+        this.audioLeft.volume = 0.4
+        return this.audioLeft.play();
+      }
+      if(teste > 150) {
+        this.audioLeft.volume = 0.1
+        return this.audioLeft.play();
+      }
+    }
+    // switch (teste) {
+    //   case teste <= -80 === true :
+    //     this.audio.volume = 0.6
+    //     this.audio.play();
+    //     break;
+    //   case teste < -60:
+    //     this.audio.volume = 0.8
+    //     this.audio.play();
+    //     break;
+    //   case teste < -40:
+    //     this.audio.volume = 1
+    //     this.audio.play();
+    //     break;
+    // }
+    // if ((player.hitbox.position.x + player.hitbox.width + 81) === this.position.x) {
+
+    // }
   }
 
   checkForHeroCollisions() {

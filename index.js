@@ -64,7 +64,7 @@ const player = new Player({
 // const enemy = new Enemy({})
 
 
-let level = 2;
+let level = 1;
 let levels = {
   1: {
     init: () => {
