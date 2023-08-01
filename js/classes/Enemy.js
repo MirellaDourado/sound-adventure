@@ -15,6 +15,7 @@ class Enemy {
     this.maximumLimit = maximumLimit;
     this.audioRight = new Audio('../../sounds/ghost-right.mp3')
     this.audioLeft = new Audio('../../sounds/ghost-left.mp3')
+    this.looseGame = new Audio('../../sounds/loose-game.mp3')
 
   }
 
@@ -64,7 +65,6 @@ class Enemy {
     } if (this.position.x < player.hitbox.position.x + player.hitbox.width)   {
       this.audioRight.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      console.log(teste)
       if(teste > 200) {
         this.audioLeft.volume = 0.03
         return this.audioLeft.play();
@@ -77,28 +77,7 @@ class Enemy {
         this.audioLeft.volume = 1
         return this.audioLeft.play();
       }
-      // if(teste > 90) {
-      //   this.audioLeft.volume = 0.1
-      //   return this.audioLeft.play();
-      // }
     }
-    // switch (teste) {
-    //   case teste <= -80 === true :
-    //     this.audio.volume = 0.6
-    //     this.audio.play();
-    //     break;
-    //   case teste < -60:
-    //     this.audio.volume = 0.8
-    //     this.audio.play();
-    //     break;
-    //   case teste < -40:
-    //     this.audio.volume = 1
-    //     this.audio.play();
-    //     break;
-    // }
-    // if ((player.hitbox.position.x + player.hitbox.width + 81) === this.position.x) {
-
-    // }
   }
 
   checkForHeroCollisions() {
@@ -112,14 +91,42 @@ class Enemy {
       player.hitbox.position.y <=
         this.position.y + this.height
     ) {
+      this.audioLeft.pause();
+      this.audioRight.pause();
+      level = 1;
+
       if (player.hitbox.position.x < this.position.x) {
         const offset =
             player.hitbox.position.x - player.position.x + player.hitbox.width
+            this.looseGame.play();
         player.position.x = this.position.x - offset - 0.01;
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            levels[1].init()
+            player.preventInput = false
+            player.position = { x: 200, y: 300 }
+            gsap.to(overlay, {
+              opacity: 0,
+            })
+          },
+        })
       }
       if (player.hitbox.position.x > this.position.x) {
         const offset = player.hitbox.position.x - player.position.x
+        this.looseGame.play();
         player.position.x = this.position.x + this.width - offset + 0.01;
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            levels[1].init()
+            player.preventInput = false
+            player.position = { x: 200, y: 300 }
+            gsap.to(overlay, {
+              opacity: 0,
+            })
+          },
+        })
       }
     }
   }

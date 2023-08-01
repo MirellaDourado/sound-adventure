@@ -13,7 +13,7 @@ const enemyLevel1 = [{
   maximumLimit: 630,
   position: {
     x: 470,
-    y: 220,
+    y: 360,
   },
   velocity: {
     x: 2,
