@@ -48,35 +48,31 @@ class Enemy {
   }
 
   makeSound() {
+    const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
     if (this.position.x > player.hitbox.position.x + player.hitbox.width && !this.attacked){
-      this.audioLeft.pause();
-      const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      if(teste >= -60) {
-        this.audioRight.volume = 1
-        return this.audioRight.play();
-      }
-      if(teste >= -100) {
-        this.audioRight.volume = 0.6 
-        return this.audioRight.play();
-      }
-      if(teste >= -200) {
-        this.audioRight.volume = 0.03
-        return this.audioRight.play();
+      if(teste >= -170) {
+        this.audioLeft.pause();
+        this.audioRight.play();
+        this.audioRight.volume = 0.07
+        if(teste >= -90) {
+          return this.audioRight.volume = 1
+        }
+        if(teste >=- 130) {
+          return this.audioRight.volume = 0.6 
+        }
       }
     } if (this.position.x < player.hitbox.position.x + player.hitbox.width && !this.attacked)   {
-      this.audioRight.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      if(teste >= 200) {
+      if(teste >= 170) {
+        this.audioRight.pause();
+        this.audioLeft.play();
         this.audioLeft.volume = 0.03
-        return this.audioLeft.play();
-      }
-      if(teste >= 100) {
-        this.audioLeft.volume = 0.4
-        return this.audioLeft.play();
-      }
-      if(teste >= 60) {
-        this.audioLeft.volume = 1
-        return this.audioLeft.play();
+        if(teste >= 130) {
+          return this.audioLeft.volume = 0.09
+        }
+        if(teste <= 90) {
+          return this.audioLeft.volume = 1
+        }
       }
     }
   }
