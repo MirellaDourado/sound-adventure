@@ -48,7 +48,7 @@ class Enemy {
   }
 
   makeSound() {
-    if (this.position.x > player.hitbox.position.x + player.hitbox.width){
+    if (this.position.x > player.hitbox.position.x + player.hitbox.width && !this.attacked){
       this.audioLeft.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
       if(teste >= -60) {
@@ -63,7 +63,7 @@ class Enemy {
         this.audioRight.volume = 0.03
         return this.audioRight.play();
       }
-    } if (this.position.x < player.hitbox.position.x + player.hitbox.width)   {
+    } if (this.position.x < player.hitbox.position.x + player.hitbox.width && !this.attacked)   {
       this.audioRight.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
       if(teste >= 200) {
