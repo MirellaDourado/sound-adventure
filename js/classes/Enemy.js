@@ -54,29 +54,33 @@ class Enemy {
         return this.audioRight.play();
       }
       if(teste > -80) {
-        this.audioRight.volume = 0.5
+        this.audioRight.volume = 0.4  
         return this.audioRight.play();
       }
-      if(teste > -150) {
-        this.audioRight.volume = 0.2
+      if(teste > -100) {
+        this.audioRight.volume = 0.03
         return this.audioRight.play();
       }
     } if (this.position.x < player.hitbox.position.x + player.hitbox.width)   {
       this.audioRight.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
       console.log(teste)
-      if(teste > 40) {
-        this.audioLeft.volume = 1
-        return this.audioLeft.play();
-      }
-      if(teste > 80) {
-        this.audioLeft.volume = 0.4
+      if(teste > 200) {
+        this.audioLeft.volume = 0.03
         return this.audioLeft.play();
       }
       if(teste > 150) {
-        this.audioLeft.volume = 0.1
+        this.audioLeft.volume = 0.4
         return this.audioLeft.play();
       }
+      if(teste >= 100) {
+        this.audioLeft.volume = 1
+        return this.audioLeft.play();
+      }
+      // if(teste > 90) {
+      //   this.audioLeft.volume = 0.1
+      //   return this.audioLeft.play();
+      // }
     }
     // switch (teste) {
     //   case teste <= -80 === true :
