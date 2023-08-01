@@ -197,7 +197,7 @@ function animate() {
   if (attack) {
     attack = false;
     c.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    c.fillRect(player.hitbox.position.x, player.hitbox.position.y + 20, player.lastDirection === 'right' ? 90 : -90, 25)
+    c.fillRect(player.hitbox.position.x, player.hitbox.position.y + 20, player.lastDirection === 'right' ? 130 : -130, 25)
   }
 
   c.save()

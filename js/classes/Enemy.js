@@ -54,11 +54,11 @@ class Enemy {
         this.audioLeft.pause();
         this.audioRight.play();
         this.audioRight.volume = 0.07
-        if(teste >= -90) {
+        if(teste >= -110) {
           return this.audioRight.volume = 1
         }
         if(teste >=- 130) {
-          return this.audioRight.volume = 0.6 
+          return this.audioRight.volume = 0.09
         }
       }
     } if (this.position.x < player.hitbox.position.x + player.hitbox.width && !this.attacked)   {
@@ -78,7 +78,7 @@ class Enemy {
   }
 
   checkForHeroCollisions() {
-    if (attack && player.hitbox.position.x + 90 > this.position.x){
+    if (attack && player.hitbox.position.x + 130 > this.position.x){
       this.attacked = true;
       this.audioLeft.pause();
       this.audioRight.pause();
