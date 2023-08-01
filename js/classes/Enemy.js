@@ -86,7 +86,7 @@ class Enemy {
       this.attacked = true;
       this.audioLeft.pause();
       this.audioRight.pause();
-      this.punchAudio.play();
+      return this.punchAudio.play();
     } 
     if (
       player.hitbox.position.x <=

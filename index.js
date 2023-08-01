@@ -4,6 +4,7 @@ const c = canvas.getContext('2d')
 canvas.width = 64 * 16 // 1024
 canvas.height = 64 * 9 // 576
 
+const nextLevelAudio = new Audio('../sounds/next-level.mp3')
 let parsedCollisions
 let collisionBlocks
 let background
@@ -48,7 +49,7 @@ const player = new Player({
           opacity: 1,
           onComplete: () => {
             level++
-
+            nextLevelAudio.play();
             if (level === 4) level = 1
             levels[level].init()
             player.switchSprite('idleRight')
@@ -203,7 +204,7 @@ function animate() {
   if (attack) {
     attack = false;
     c.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    c.fillRect(player.hitbox.position.x, player.hitbox.position.y + 20, 90, 25)
+    c.fillRect(player.hitbox.position.x, player.hitbox.position.y + 20, player.lastDirection === 'right' ? 90 : -90, 25)
   }
 
   c.save()
