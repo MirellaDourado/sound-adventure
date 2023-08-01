@@ -12,6 +12,8 @@ Bem-vindo ao jogo Sound Adventure! Neste jogo, você entrará em uma emocionante
 
 4. **Sobrevivência**: O objetivo é sobreviver o máximo de tempo possível. Enfrente os fantasmas com coragem e habilidade, e tente bater seu próprio recorde a cada nova partida.
 
+5. **Onde jogar**:
+
 ## Tecnologia
 
 O jogo foi desenvolvido principalmente utilizando JavaScript e o Canvas para renderização dos gráficos. Essa combinação permitiu criar uma experiência interativa e dinâmica.
