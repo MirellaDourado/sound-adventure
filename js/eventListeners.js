@@ -12,6 +12,8 @@ window.addEventListener('keydown', (event) => {
           player.hitbox.position.y + player.hitbox.height >= door.position.y &&
           player.hitbox.position.y <= door.position.y + door.height
         ) {
+          player.rightAudio.pause();
+          player.leftAudio.pause()
           const doorAudio = new Audio('./sounds/open-door.mp3');
           doorAudio.play()
           player.velocity.x = 0
@@ -36,6 +38,9 @@ window.addEventListener('keydown', (event) => {
       // move player to the right
       keys.d.pressed = true
       break
+      case ' ': 
+      attack = true;
+      break;
   }
 })
 

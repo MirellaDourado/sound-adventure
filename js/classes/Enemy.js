@@ -16,7 +16,8 @@ class Enemy {
     this.audioRight = new Audio('../../sounds/ghost-right.mp3')
     this.audioLeft = new Audio('../../sounds/ghost-left.mp3')
     this.looseGame = new Audio('../../sounds/loose-game.mp3')
-
+    this.punchAudio = new Audio('../../sounds/punch.mp3')
+    this.attacked = false;
   }
 
   draw() {
@@ -50,30 +51,31 @@ class Enemy {
     if (this.position.x > player.hitbox.position.x + player.hitbox.width){
       this.audioLeft.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      if(teste > -40) {
+      console.log(teste)
+      if(teste >= -60) {
         this.audioRight.volume = 1
         return this.audioRight.play();
       }
-      if(teste > -80) {
-        this.audioRight.volume = 0.4  
+      if(teste >= -100) {
+        this.audioRight.volume = 0.6 
         return this.audioRight.play();
       }
-      if(teste > -100) {
+      if(teste >= -200) {
         this.audioRight.volume = 0.03
         return this.audioRight.play();
       }
     } if (this.position.x < player.hitbox.position.x + player.hitbox.width)   {
       this.audioRight.pause();
       const teste = player.hitbox.position.x + player.hitbox.width - this.position.x;
-      if(teste > 200) {
+      if(teste >= 200) {
         this.audioLeft.volume = 0.03
         return this.audioLeft.play();
       }
-      if(teste > 150) {
+      if(teste >= 100) {
         this.audioLeft.volume = 0.4
         return this.audioLeft.play();
       }
-      if(teste >= 100) {
+      if(teste >= 60) {
         this.audioLeft.volume = 1
         return this.audioLeft.play();
       }
@@ -81,6 +83,12 @@ class Enemy {
   }
 
   checkForHeroCollisions() {
+    if (attack && player.hitbox.position.x + 90 > this.position.x){
+      this.attacked = true;
+      this.audioLeft.pause();
+      this.audioRight.pause();
+      this.punchAudio.play();
+    } 
     if (
       player.hitbox.position.x <=
         this.position.x + this.width &&
@@ -89,10 +97,9 @@ class Enemy {
       player.hitbox.position.y + player.hitbox.height >=
         this.position.y &&
       player.hitbox.position.y <=
-        this.position.y + this.height
+        this.position.y + this.height && !this.attacked
     ) {
-      this.audioLeft.pause();
-      this.audioRight.pause();
+      
       level = 1;
 
       if (player.hitbox.position.x < this.position.x) {

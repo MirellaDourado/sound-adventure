@@ -9,6 +9,7 @@ let collisionBlocks
 let background
 let doors
 let enemies
+let attack = false;
 const player = new Player({
   imageSrc: './img/king/idle.png',
   frameRate: 11,
@@ -199,6 +200,11 @@ function animate() {
     enemy.update(player);
   })
 
+  if (attack) {
+    attack = false;
+    c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    c.fillRect(player.hitbox.position.x, player.hitbox.position.y + 20, 90, 25)
+  }
 
   c.save()
   c.globalAlpha = overlay.opacity
