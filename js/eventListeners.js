@@ -1,3 +1,6 @@
+const rightStep = new Audio('../sounds/right-step.mp3')
+const leftStep = new Audio('../sounds/left-step.mp3')
+
 window.addEventListener('keydown', (event) => {
   if (player.preventInput) return
   switch (event.key) {
@@ -30,9 +33,12 @@ window.addEventListener('keydown', (event) => {
       }
       break
     case 'ArrowLeft':
+      leftStep.play();
+      leftStep.volume = 1
       keys.ArrowLeft.pressed = true
       break
     case 'ArrowRight':
+      rightStep.play()
       keys.ArrowRight.pressed = true
       break
       case ' ': 
