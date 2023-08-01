@@ -4,7 +4,6 @@ const c = canvas.getContext('2d')
 canvas.width = 64 * 16 // 1024
 canvas.height = 64 * 9 // 576
 
-
 let parsedCollisions
 let collisionBlocks
 let background
@@ -43,7 +42,6 @@ const player = new Player({
       loop: false,
       imageSrc: './img/king/enterDoor.png',
       onComplete: () => {
-        console.log('completed animation')
         gsap.to(overlay, {
           opacity: 1,
           onComplete: () => {
@@ -62,6 +60,8 @@ const player = new Player({
     },
   },
 })
+const enemy = new Enemy({})
+
 
 let level = 1
 let levels = {
@@ -70,6 +70,7 @@ let levels = {
       parsedCollisions = collisionsLevel1.parse2D()
       collisionBlocks = parsedCollisions.createObjectsFrom2D()
       player.collisionBlocks = collisionBlocks
+      enemy.collisionBlocks = collisionBlocks;
       if (player.currentAnimation) player.currentAnimation.isActive = false
 
       background = new Sprite({
@@ -189,10 +190,12 @@ function animate() {
   doors.forEach((door) => {
     door.draw()
   })
-
+  enemy.draw()
   player.handleInput(keys)
   player.draw()
   player.update()
+  enemy.update(player)
+
 
   c.save()
   c.globalAlpha = overlay.opacity

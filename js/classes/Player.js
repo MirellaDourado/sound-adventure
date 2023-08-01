@@ -3,7 +3,7 @@ class Player extends Sprite {
     super({ imageSrc, frameRate, animations, loop })
     this.position = {
       x: 200,
-      y: 200,
+      y: 220,
     }
 
     this.velocity = {
@@ -30,7 +30,7 @@ class Player extends Sprite {
 
     this.checkForHorizontalCollisions()
     this.applyGravity()
-this.checkForDoors()
+    this.checkForDoors()
     this.updateHitbox()
     this.checkForVerticalCollisions()
 
@@ -94,7 +94,6 @@ this.checkForDoors()
             this.leftAudio.play();
           break
         }
-
         if (this.velocity.x > 0) {
           const offset =
             this.hitbox.position.x - this.position.x + this.hitbox.width

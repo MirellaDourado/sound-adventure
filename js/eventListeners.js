@@ -1,5 +1,3 @@
-
-
 window.addEventListener('keydown', (event) => {
   if (player.preventInput) return
   switch (event.key) {
