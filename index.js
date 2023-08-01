@@ -8,6 +8,7 @@ let parsedCollisions
 let collisionBlocks
 let background
 let doors
+let enemies
 const player = new Player({
   imageSrc: './img/king/idle.png',
   frameRate: 11,
@@ -60,17 +61,18 @@ const player = new Player({
     },
   },
 })
-const enemy = new Enemy({})
+// const enemy = new Enemy({})
 
 
-let level = 1
+let level = 2;
 let levels = {
   1: {
     init: () => {
       parsedCollisions = collisionsLevel1.parse2D()
       collisionBlocks = parsedCollisions.createObjectsFrom2D()
+      enemies = enemyLevel1.drawEnemies();
       player.collisionBlocks = collisionBlocks
-      enemy.collisionBlocks = collisionBlocks;
+      enemies.map((ar) => ar.setCollision(collisionBlocks))
       if (player.currentAnimation) player.currentAnimation.isActive = false
 
       background = new Sprite({
@@ -100,7 +102,9 @@ let levels = {
     init: () => {
       parsedCollisions = collisionsLevel2.parse2D()
       collisionBlocks = parsedCollisions.createObjectsFrom2D()
+      enemies = enemyLevel2.drawEnemies();
       player.collisionBlocks = collisionBlocks
+      enemies.map((ar) => ar.setCollision(collisionBlocks))
       player.position.x = 96
       player.position.y = 140
 
@@ -186,15 +190,17 @@ function animate() {
   // collisionBlocks.forEach((collisionBlock) => {
   //   collisionBlock.draw()
   // })
-
+  
   doors.forEach((door) => {
     door.draw()
   })
-  enemy.draw()
   player.handleInput(keys)
   player.draw()
   player.update()
-  enemy.update(player)
+  enemies.forEach((enemy) => {
+    enemy.draw();
+    enemy.update(player);
+  })
 
 
   c.save()

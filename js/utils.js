@@ -27,3 +27,13 @@ Array.prototype.createObjectsFrom2D = function () {
 
   return objects
 }
+
+Array.prototype.drawEnemies = function () {
+  const obj = []
+  this.forEach(({ position, velocity, maximumLimit, minimumLimit }) => { 
+    obj.push(
+      new Enemy({ position: {y: position.y, x: position.x}, velocity: {y:velocity.y, x:velocity.x}, maximumLimit, minimumLimit })
+    )
+  })
+  return obj;
+}

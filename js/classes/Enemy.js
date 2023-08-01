@@ -1,22 +1,18 @@
 class Enemy {
-  constructor({ collisionBlocks = [] }) {
+  constructor({ collisionBlocks = [], position, velocity, minimumLimit, maximumLimit }) {
     this.height = 25
     this.width = 25
-    this.position = {
-      x: 470,
-      y: 220,
-    }
+    this.position = position;
 
-    this.velocity = {
-      x: 2,
-      y: 0,
-    }
+    this.velocity = velocity
 
     this.sides = {
       bottom: this.position.y + this.height,
     }
     this.gravity = 1
     this.collisionBlocks = collisionBlocks;
+    this.minimumLimit = minimumLimit;
+    this.maximumLimit = maximumLimit;
   }
 
   draw() {
@@ -24,27 +20,29 @@ class Enemy {
     c.fillRect(this.position.x, this.position.y, this.width, this.height)
   }
 
+  setCollision(c) {
+    this.collisionBlocks = c;
+  }
+
   update(player) {
     this.moveEnemy();
     this.checkForHeroCollisions(player)
     this.applyGravity()
-  //   this.updateHitbox()
     this.checkForVerticalCollisions()
-    
-
   }
 
   moveEnemy() {
+    console.log(this.maximumLimit, this.minimumLimit )
     this.position.x += this.velocity.x
-    if (this.position.x + this.width >= 630) {
+    if (this.position.x + this.width >= this.maximumLimit) {
       this.velocity.x = -this.velocity.x;
     }
-    if (this.position.x + this.width <= 470) {
+    if (this.position.x + this.width <= this.minimumLimit) {
       this.velocity.x = -this.velocity.x;
     }
   }
 
-  checkForHeroCollisions(player) {
+  checkForHeroCollisions() {
     if (
       player.hitbox.position.x <=
         this.position.x + this.width &&
